@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME OVER - GAULOIS FAIL</title>
+    <link rel="stylesheet" href="fail.css">
+</head>
+
+<body>
+
+    <div class="pixel-bg"></div>
+    <div class="pixel-grid"></div>
+
+    <h1 class="pixel-title">
+        <span class="pixel-block">▒▓</span>
+        GAME OVER
+        <span class="pixel-block">▓▒</span><br>
+        <span class="subtitle">LES ROMAINS ONT PRIS NIRD</span>
+    </h1>
+
+    <button class="pixel-btn" onclick="openPopup()">
+        RETENTER LA DEFENSE
+    </button>
+
+    <!-- POPUP FAIL -->
+    <div class="popup" id="popup-fail">
+        <div class="popup-box">
+
+            <!-- Icônes pixel art -->
+            <div class="corner-icon top-left">
+                <div class="pixel-skull"></div>
+            </div>
+
+            <div class="corner-icon top-right">
+                <div class="pixel-fire"></div>
+            </div>
+
+            <div class="corner-icon bottom-left">
+                <div class="pixel-sword-broken"></div>
+            </div>
+
+            <div class="corner-icon bottom-right">
+                <div class="pixel-roman"></div>
+            </div>
+
+            <h2 class="pixel-text-title">💥 MISSION ÉCHOUÉE 💥</h2>
+
+            <div class="message-box">
+                <p class="pixel-text">☠️ LES ROMAINS ONT PRIS LE VILLAGE NIRD ☠️</p>
+                <p class="pixel-text">🔥 MAIS LES GAULOIS NE SE RENDENT JAMAIS ! 🔥</p>
+            </div>
+
+            <button class="pixel-action-btn" onclick="closePopup()">
+                ↻ Je n’abandonne pas !
+            </button>
+
+            <div class="pixel-border"></div>
+        </div>
+    </div>
+
+<script>
+function openPopup() {
+    document.getElementById("popup-fail").style.display = "flex";
+    playBeep();
+}
+
+function closePopup() {
+    document.getElementById("popup-fail").style.display = "none";
+}
+
+function playBeep() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.value = 150;
+    oscillator.type = "square";
+
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
+}
+
+document.getElementById("popup-fail").addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+});
+</script>
+
+</body>
+</html>
