@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-BIT GAULOIS BATTLE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="felicitation.css">
 </head>
 
@@ -14,13 +13,12 @@
     
     <h1 class="pixel-title">
         <span class="pixel-block">░▒▓</span>
-        POP-UP 8-BIT
-        <span class="pixel-block">▓▒░</span><br>
-        <span class="subtitle">ASTÉRIX VS ROMAINS</span>
+Ta stratégie a sauvé le village !        <span class="pixel-block">▓▒░</span><br>
+        <span class="subtitle">Village NIRD vs Géants Numériques</span>
     </h1>
 
     <button class="pixel-btn" onclick="openPopup()">
-        <span class="pixel-block">▶</span> DÉMARRER LE COMBAT
+        <span class="pixel-block">▶</span> DEMARRER LE COMBAT
     </button>
 
     <div class="popup" id="popup-felicitation">
@@ -50,7 +48,7 @@
             </div>
             
             <!-- Contenu principal -->
-            <h2 class="pixel-text">★ VICTOIRE GAULOISE ★</h2>
+            <h2 class="pixel-text">★ VICTOIRE ★</h2>
             
             <div class="message-box">
                 <p class="pixel-text">Tu as libéré le village NIRD.</p>
@@ -67,52 +65,69 @@
 
     <div class="pixel-grid"></div>
     
-    <script>
-        function openPopup() {
-            document.getElementById("popup-felicitation").style.display = "flex";
-            // Son 8-bit
-            playBeep();
-        }
+  <script>
+    function openPopup() {
+        document.getElementById("popup-felicitation").style.display = "flex";
+        // Son 8-bit
+        playBeep();
+    }
+    
+    function closePopup() {
+        document.getElementById("popup-felicitation").style.display = "none";
+    }
+    
+    // NOUVELLE FONCTION: Rediriger vers le jeu
+    function returnToGame() {
+        // Fermer le popup
+        closePopup();
         
-        function closePopup() {
-            document.getElementById("popup-felicitation").style.display = "none";
-        }
+        // Jouer un son de confirmation
+        playBeep();
         
-        document.getElementById("popup-felicitation").addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
-            }
+        // Rediriger vers le jeu après un court délai
+        setTimeout(() => {
+            window.location.href = "snake.html";
+        }, 300);
+    }
+    
+    document.getElementById("popup-felicitation").addEventListener('click', function(e) {
+        if (e.target === this) {
+            closePopup();
+        }
+    });
+    
+    function playBeep() {
+        // Simulation son 8-bit
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = 800;
+        oscillator.type = 'square';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.2);
+    }
+    
+    // MODIFICATION: Le bouton "DÉMARRER LE COMBAT" ouvre le popup
+    document.querySelector('.pixel-btn').addEventListener('click', openPopup);
+    
+    // MODIFICATION: Le bouton "Défendre encore !" retourne au jeu
+    document.querySelector('.pixel-action-btn').addEventListener('click', returnToGame);
+    
+    // Animation des icônes
+    document.querySelectorAll('.corner-icon').forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.3)';
         });
-        
-        function playBeep() {
-            // Simulation son 8-bit
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.value = 800;
-            oscillator.type = 'square';
-            
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.2);
-        }
-        
-        // Animation des icônes
-        document.querySelectorAll('.corner-icon').forEach(icon => {
-            icon.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.3)';
-            });
-            icon.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-            });
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
         });
-    </script>
-
-</body>
-</html>
+    });
+</script>

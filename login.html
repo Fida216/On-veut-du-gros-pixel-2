@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Village NIRD - La Libération</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <!-- CRT Effects -->
+    <div class="crt"></div>
+    <div class="scanline"></div>
+
+    <!-- Particle Effects -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Victory Overlay -->
+    <div class="victory-overlay" id="victoryOverlay">
+        <div class="victory-container">
+            <h2 class="victory-title">VICTOIRE</h2>
+            
+            <div class="victory-icons">
+                <div class="victory-icon">🏆</div>
+                <div class="victory-icon">⚔</div>
+                <div class="victory-icon">🛡</div>
+                <div class="victory-icon">🏰</div>
+            </div>
+            
+            <p class="victory-message">Tu as libéré le village</p>
+            <div class="village-name">NIRD</div>
+            <p class="victory-message">Encore un pas vers l'indépendance !</p>
+            <p class="victory-message" style="font-size: 1.5rem; color: #ffd93d; animation-delay: 0.5s;">Détendre encore !</p>
+            
+            <button class="continue-button" onclick="continueGame()">CONTINUER LA LUTTE</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Title -->
+        <div class="title-container">
+            <h1 class="main-title">NIRD VILLAGE</h1>
+            <p class="subtitle">     Dans un monde envahi par les géants numériques,
+        une petite communauté résiste encore et toujours...
+         <p class="subtitle">Entre dans la légende et rejoins la résistance !</p>
+        </div>
+
+        <!-- THE SINGLE BUTTON -->
+        <div class="button-container">
+            <div class="single-button" id="mainButton">
+                <div class="button-content">
+                    <div class="button-icon">⚔</div>
+                    <h2 class="button-title">LIBERER</h2>
+                    <p class="button-desc">CLIQUEZ POUR DÉFENDRE<br>LE VILLAGE NIRD</p>
+                 </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+
+    <!-- Message Display -->
+    <div class="message-display" id="messageDisplay">
+        PROTÉGEZ LE VILLAGE!<br>
+        Commenser la résistance !<br>
+       Libérez NIRD!
+    </div>
+
+    <script>
+        // Fonction pour rediriger vers le jeu
+        function startGame() {
+            // Effet sonore
+            playBeep();
+            
+            // Effet visuel sur le bouton
+            const button = document.getElementById('mainButton');
+            button.style.animation = 'none';
+            setTimeout(() => {
+                button.style.animation = 'buttonPulse 0.5s ease, buttonGlow 0.5s ease';
+            }, 10);
+            
+            // Redirection vers le jeu
+            setTimeout(() => {
+                window.location.href = "snake.html";
+            }, 500);
+        }
+        
+        function playBeep() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+        
+        // Lier le bouton à la fonction startGame
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainButton = document.getElementById('mainButton');
+            if (mainButton) {
+                mainButton.addEventListener('click', startGame);
+                mainButton.addEventListener('touchend', startGame);
+            }
+        });
+    </script>
+</body>
+</html>

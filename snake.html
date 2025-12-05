@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RETRO SNAKE GAME - AUTONOMIE NUMERIQUE</title>
+    <link rel="stylesheet" href="snake.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Message d'autonomie numérique -->
+    <div class="autonomy-message" id="autonomyMessage">AUTONOMIE NUMERIQUE</div>
+
+    <!-- MODIFICATION: Supprimer les affichages de best score et level -->
+    <div class="ui-container">
+      <div class="ui-left">
+        <div class="stat-item">
+          <span class="stat-label">SCORE</span>
+          <span class="stat-value" id="score">0</span>
+          <div class="speed-indicator" id="speedDisplay">SPEED: ULTRA FAST</div>
+          <div class="color-indicator" id="colorDisplay">COLOR: BLUE</div>
+        </div>
+      </div>
+      <div class="ui-center">
+        <!-- MODIFICATION: Afficher le logo actuel et les logos mangés -->
+        <div class="stat-item">
+          <div class="speed-indicator">
+            CURRENT: <span id="currentLogoName">--</span>
+          </div>
+          <div class="speed-indicator">
+            EATEN: <span id="logosEaten">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="ui-right">
+        <!-- MODIFICATION: Section vide pour maintenir la mise en page -->
+        <div></div>
+      </div>
+    </div>
+
+    <div class="crt-effect"></div>
+
+<div class="controls-overlay">
+  <div>UTILISE LES FLECHES POUR TE DEPLACER</div>
+  <div class="btn-group">
+    <button class="retro-btn" id="startBtn">DEmarrer</button>
+    <button class="retro-btn" id="pauseBtn">Pause</button>
+    <button class="retro-btn" id="resetBtn">REinitialiser</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="game-over-modal" id="gameOverModal">
+  <h2>FIN DE JEU !</h2>
+  <p>SCORE FINAL : <span id="finalScore">0</span></p>
+  <p>LOGOS MANGÉS : <span id="finalLogos">0</span></p>
+  <p>VITESSE MAXIMALE : <span id="finalSpeed">ULTRA RAPIDE</span></p>
+  <p>COULEUR FINALE : <span id="finalColor">BLEU</span></p>
+
+  <button class="retro-btn" id="closeGameOver">Fermer</button>
+</div>
+
+      <button
+        class="retro-btn"
+        onclick="document.getElementById('startBtn').click()"
+      >
+        PLAY AGAIN
+      </button>
+    </div>
+
+    <!-- Audio pour les effets sonores -->
+    <!-- REMPLACÉ: Le son eatSound par un son "tak" rétro -->
+    <audio id="eatSound" preload="auto">
+      <source
+        src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-arcade-game-notification-264.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="moveSound" preload="auto">
+      <source
+        src="https://assets.mixkit.co/sfx/preview/mixkit-retro-arcade-game-shot-2060.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="gameOverSound" preload="auto">
+      <source
+        src="https://assets.mixkit.co/sfx/preview/mixkit-retro-arcade-game-over-470.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="flameSound" preload="auto">
+      <source
+        src="https://assets.mixkit.co/sfx/preview/mixkit-flame-woosh-1095.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="colorChangeSound" preload="auto">
+      <source
+        src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-arcade-game-notification-264.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <script src="snake.js"></script>
+  </body>
+</html>

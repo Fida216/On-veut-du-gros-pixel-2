@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAME OVER - GAULOIS FAIL</title>
+    <title>GAME OVER - VILLAGE FAIL</title>
     <link rel="stylesheet" href="fail.css">
 </head>
 
@@ -16,7 +16,7 @@
         <span class="pixel-block">▒▓</span>
         GAME OVER
         <span class="pixel-block">▓▒</span><br>
-        <span class="subtitle">LES ROMAINS ONT PRIS NIRD</span>
+        <span class="subtitle">LES  GEANTS NUMERIQUES ONT PRIS  LE VILLAGE NIRD</span>
     </h1>
 
     <button class="pixel-btn" onclick="openPopup()">
@@ -47,8 +47,8 @@
             <h2 class="pixel-text-title">💥 MISSION ÉCHOUÉE 💥</h2>
 
             <div class="message-box">
-                <p class="pixel-text">☠️ LES ROMAINS ONT PRIS LE VILLAGE NIRD ☠️</p>
-                <p class="pixel-text">🔥 MAIS LES GAULOIS NE SE RENDENT JAMAIS ! 🔥</p>
+                <p class="pixel-text">☠️ LES  GEANTS NUMERIQUES ONT PRIS LE VILLAGE NIRD ☠️</p>
+                <p class="pixel-text">🔥 MAIS LE  VILLAGE NE SE RENDE JAMAIS ! 🔥</p>
             </div>
 
             <button class="pixel-action-btn" onclick="closePopup()">
@@ -87,10 +87,25 @@ function playBeep() {
     oscillator.stop(audioContext.currentTime + 0.5);
 }
 
+// MODIFICATION: Quand on clique sur "Je n'abandonne pas !" on retourne au jeu
+function returnToGame() {
+    // Jouer un son de confirmation
+    playBeep();
+    
+    // Rediriger vers le jeu après un court délai
+    setTimeout(() => {
+        window.location.href = "snake.html";
+    }, 200);
+}
+
+// MODIFICATION: Le bouton principal "RETENTER LA DEFENSE" ouvre le popup
+document.querySelector('.pixel-btn').addEventListener('click', openPopup);
+
+// MODIFICATION: Le bouton "Je n'abandonne pas !" retourne au jeu
+document.querySelector('.pixel-action-btn').addEventListener('click', returnToGame);
+
+// Fermer le popup si on clique en dehors
 document.getElementById("popup-fail").addEventListener('click', function(e) {
     if (e.target === this) closePopup();
 });
 </script>
-
-</body>
-</html>
